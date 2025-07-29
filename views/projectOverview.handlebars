@@ -1,0 +1,64 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeProjects=true}}
+
+  <div class="md:col-span-9 ml-10">
+     <div class=" text-gray-500 text-sm italic">
+        HRIS / <a href="/projects">Projects Overview</a>
+    </div>
+    <div class="mt-10 rounded-lg shadow-md bg-white">
+      <h2 class="p-5 font-bold">Projects</h2>
+      <div class="flex justify-end items-center space-x-4 p-4">
+        <input id="searchInputProjects" type="text" placeholder="Search Name..." class="p-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-secondary-200">
+        <button id="showAllProjects" class="px-3 py-1 text-sm text-secondary-200 border border-secondary-200 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md">Show All</button>
+        <label for="toggle" class="text-sm text-gray-700">Toggle Status</label>
+        <i id="toggleActiveProjects" class="fa-solid fa-toggle-on text-xl text-green-500 cursor-pointer"></i>
+        <i id="toggleInactiveProjects" class="fa-solid fa-toggle-off text-xl text-secondary-500 cursor-pointer hidden"></i>
+      </div>
+      <div class="p-4">
+        <table id="projectTable" class="table-auto w-full border-collapse bg-white rounded-lg">
+          <thead>
+            <tr class="text-gray-600 align-top text-xs lg:text-sm leading-normal">
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="name">Name</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="description">Description</th>
+              {{!-- <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="programmeGeography">Programme Geography</th> --}}
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="projecClientName">Project Client Name</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="projectLeader">Project Leader</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600 hidden" data-column="projectStatus">Project Status</th>           
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="projectEndDate">Project End Date</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="bmgfProjectFinance">Deliverable-based Project</th>
+            </tr>
+          </thead>
+          <tbody id="projectTableBody"  class="text-gray-600 text-xs lg:text-sm font-light">
+            {{#each projects}}
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
+              <td data-column="name" class="py-3 px-4 text-left">
+                <a href="/projects/{{this._id}}" class="text-secondary-400 hover:underline">{{this.name}}</a>
+              </td>
+              <td data-column="description" class="py-3 px-4 text-left">{{this.description}}</td>
+              {{!-- <td data-column="programmeGeography" class="py-3 px-4 text-left">{{this.programmeGeography}}</td> --}}
+              <td data-column="projecClientName" class="py-3 px-4 text-left">{{this.projectClientName}}</td>
+              <td data-column="projectLeader" class="py-3 px-4 text-left">{{this.projectLeader.name}}</td>
+              <td data-column="projectStatus" class="py-3 px-4 text-left hidden">
+                {{#if (eq this.projectStatus "Active")}}
+                  <i class="fas fa-check-circle text-green-500"></i> Active
+                {{else}}
+                  <i class="fas fa-times-circle text-red-500"></i> Inactive
+                {{/if}}
+              </td>              
+              <td data-column="projectEndDate" class="py-3 px-4 text-left">{{formatDate this.projectDueDate}}</td>
+              <td data-column="bmgfProjectFinance" class="py-3 px-4 text-center">
+                {{#if (eqTrueFalse this.bmgfProjectFinance "true")}}
+                  <i class="fa fa-cubes text-blue-500"></i>
+                {{else}}
+                  <i class="fa fa-cube text-blue-500"></i>
+                {{/if}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+  </div>
+</div>

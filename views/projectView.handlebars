@@ -1,0 +1,242 @@
+
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeProjects=true}}
+
+      <!---------------CENTER CONTENT--------------------------->
+      <div class="md:col-span-9 ml-10">
+        <div class=" text-gray-500 text-sm italic">
+        HRIS / <a href="/projects">Projects / </a>
+        <span>Project Overview</span>
+        </div>
+      <!------------CARDS row -1 -------------------------------------->
+        <div class="flex gap-3 items-center">
+      <!------------PROJECT INTRO CARD ------------------------->
+          <div class="w-full max-w-full mt-20 mb-2 px-3 xl:w-8/12 text-sm rounded-lg shadow-md bg-white">
+          {{!-- PROJECT NAME --}}
+            <div class="p-5 mb-2">
+                <span class="text-xl text-secondary-200 font-bold">{{project.name}}
+                </span>
+            </div>    
+            
+            {{!-- DATES--}}
+            <div class="flex pl-5 gap-10 pb-7">
+               {{#if project.bmgfProjectFinance}}
+              <div class="flex flex-row gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-green-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Project Commence Date:</span>
+                    <span class="font-semibold text-sm">{{formatDate project.projectStartDate}}</span>
+                  </div>
+              </div>
+              <div class="flex flex-row pl-5 gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Project End Date:</span>
+                    <span class="font-semibold text-sm">{{formatDate project.projectDueDate}}</span>
+                  </div>
+              </div>
+               {{/if}}
+              <div class="flex flex-row pl-5 gap-2">
+                 {{#if (eq project.projectStatus "Inactive")}}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Project Status:</span>
+                    <span class="text-red-500 font-semibold text-sm">{{project.projectStatus}}</span>
+                  </div>  
+                 {{else}}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Project Status:</span>
+                    <span class="text-secondary-200 font-semibold text-sm">{{project.projectStatus}}</span>
+                  </div>
+                 {{/if}}
+              </div>
+            </div> 
+            {{!-- DESCRIPTION--}} 
+            <div class="flex flex-col pb-5 pl-5">
+                <span class="pb-2 font-semibold">Description:</span>
+                <span class="font-light">{{project.description}}</span>
+            </div> 
+            {{!-- OTHER--}}
+            <div class="text-sm flex flex-col pb-6 space-y-2 pl-5">
+              <div>
+                <span class="font-semibold">Project Client Name:</span>
+                <span class="font-light">{{project.projectClientName}}</span>
+              </div>
+              {{!-- <div>
+                <span class="font-semibold">Programme Geography:</span>
+                <span class="font-light">{{project.programmeGeography}}</span>
+              </div> --}}
+              <div class="flex items-center gap-2">
+                <span class="font-semibold">Project Leader:</span>
+               <a href="/consultant/{{project.projectLeader._id}}"> <span class="font-light">{{project.projectLeader.name}}</span></a>
+              </div>
+              {{!-- {{/if}} --}}
+            </div>
+          </div> <!------------END OF PROJECT INTRO CARD ------------------------->
+          <!------------ FEES CARD  ------------------------->
+          <div class="w-full max-w-full mt-20 mb-2 px-3 xl:w-4/12">   
+            {{!-- FEED--}}
+            {{#if project.bmgfProjectFinance}}
+              <div class="flex items-center justify-items-center p-4  mb-2 flex-row gap-2 text-slate-100 bg-secondary-200 rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-green-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-50">Contract Total Value:</span>
+                    <span class="font-semibold text-sm">{{formatMoney project.contractTotalValue}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-4  mb-2 flex-row gap-2 bg-white rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-yellow-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Contract Total Fees:</span>
+                    <span class="font-semibold text-sm">{{formatMoney project.contractTotalFees}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-4 mt-2 mb-2 flex-row gap-2 bg-white rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Contract Total Expenses:</span>
+                    <span class="font-semibold text-sm">{{formatMoney project.contractTotalExpenses}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-4 mt-2 mb-2 flex-row gap-2 bg-white rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Contract Total Overhead:</span>
+                    <span class="font-semibold text-sm">{{formatMoney project.contractTotalOverhead}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-2 mt-2 mb-2 flex-row gap-2 rounded-lg shadow-md border border-secondary-600" >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-200">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div class="flex items-center gap-2" >
+                    <span class="font-semibold text-sm text-slate-500">Deliverable-based project:</span>
+                    {{#if (eqTrueFalse project.bmgfProjectFinance "false")}}
+                      <i class="fa-solid fa-toggle-off text-xl text-slate-500"></i>    
+                    {{else}}
+                      <i class="fa-solid fa-toggle-on text-xl text-secondary-600"></i>
+                    {{/if}}
+                  </div>
+              </div>
+              {{/if}}
+          </div><!------------ END OF FEES CARD -------------------------------------->
+        </div> <!------------END OF CARDS (row -1 ) ------------------------->
+        <!------------CARDS row -2 -------------------------------------->
+        <div class="container mx-auto mt-10 mb-10">
+        <div class="mb-6">
+            <h2 class="font-semibold text-lg pb-2 border-b border-gray-300">Deliverables</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {{#each project.milestones}}
+            <div class="p-4  text-secondary-200 shadow-lg rounded-lg bg-white milestone-card">
+                <div class="flex flex-col space-y-2">
+                    <div class="flex flex-col gap-3 items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
+                        </svg>
+                          <a href="/milestones/{{this._id}}" class="pb-3 font-semibold block text-secondary-200 content-center hover:underline">{{this.name}}</a>
+                    </div>
+                    
+                    {{!-- Getting consultant ID for each consultant --}}
+                    {{#each consultants}}
+                        <div class="font-semibold text-sm consultant-id hidden" data-id="{{this.consultant}}"></div>
+                    {{/each}}
+                    {{!-- Loading consultant names --}}
+                    <div class="flex flex-row gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-secondary-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                      </svg>
+                      <div class="flex flex-col">
+                        <span class="font-light text-sm text-slate-500">Consultants:</span>
+                        <div class="font-semibold text-sm consultant-names"></div>
+                      </div>
+                    </div>
+
+                    {{#if this.bmgfProjectFinance}}
+
+                    <div class="flex flex-row gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-secondary-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+                      </svg>
+                      <div class="flex flex-col">
+                        <span class="font-light text-sm text-slate-500">Deliverable End Date:</span>
+                        <span class="font-semibold text-sm">{{formatDate this.milestoneDueDate}}</span>
+                      </div>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-green-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                      </svg>
+                      <div class="flex flex-col">
+                        <span class="font-light text-sm text-slate-500">Deliverable Total Value:</span>
+                        <span class="font-semibold text-sm">{{formatMoney this.milestoneTotalValue}}</span>
+                      </div>
+                    </div>
+                    {{/if}}
+                    <div class="flex flex-row gap-2">
+                      {{#if (eq this.milestoneStatus "Inactive")}}
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-secondary-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>
+                      <div class="flex flex-col">
+                        <span class="font-light text-sm text-slate-500">Deliverable Status:</span>
+                        <span class="font-semibold text-sm text-secondary-500">{{this.milestoneStatus}}</span>
+                      </div>
+                      {{else}}
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-secondary-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>
+                      <div class="flex flex-col">
+                        <span class="font-light text-sm text-slate-500">Deliverable Status:</span>
+                        <span class="font-semibold text-sm">{{this.milestoneStatus}}</span>
+                      </div>
+                       {{/if}}
+                    </div>
+                    
+                    <div>
+              </div>
+                </div>
+            </div>
+            {{/each}}
+            </div>
+        </div>
+
+        <div class="flex gap-2">
+          <div class="mt-8 mb-5">
+          <a  href="/milestones/new" >
+            <button class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+              Add Deliverables 
+            </button>
+          </a>
+          </div>
+          <div class="mt-8 mb-5">
+          <a  href="/projects/{{project._id}}/edit" >
+            <button class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+              Edit Project 
+            </button>
+          </a>
+          </div>
+        </div>
+        
+      </div> <!------------END OF CARDS (row -2 ) -------------------------> 
+        
+      </div> <!---------------END OF CENTER CONTENT--------------------------->  
+ 
+          

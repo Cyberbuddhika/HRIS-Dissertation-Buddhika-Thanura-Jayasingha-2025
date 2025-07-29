@@ -1,0 +1,124 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeProjects=true}}
+
+  <div class="md:col-span-9 ml-10">
+    <div class=" text-gray-500 text-sm italic">
+         HRIS / <a href="/projects">Projects / </a>
+        <span id="createProject">Project Creation</span>
+    </div>
+    <div id="successMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-green-600 rounded-lg hidden">
+      <span>Success Message</span>
+    </div>
+    <div id="errorMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-secondary-500 rounded-lg hidden">
+      <span>Error Message</span>
+    </div>
+  <div class="container mx-auto mt-10 my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h2 class="font-bold mb-16 text-left">Add New Project</h2>
+    <form id="projectForm"  enctype="multipart/form-data">
+      <div class="grid grid-cols-1 md:grid-cols-2 mb-10 gap-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Project Name *</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Project Client Name -->
+        <div>
+          <label for="projectClientName" class="block text-sm font-medium text-gray-700">Project Client Name *</label>
+          <input type="text" name="projectClientName" id="projectClientName" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 mb-10 gap-6">
+
+        <!-- Project Leader -->
+        <div class="md:col-span-3">
+        <div>
+          <label for="projectLeader" class="block text-sm font-medium text-gray-700">Project Leader *</label>
+          <select type="text" name="projectLeader" id="projectLeader" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </select>
+        </div>
+        </div>
+
+      
+        <!-- Project Description -->
+        <div class="md:col-span-9">
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700">Project Description *</label>
+            <input type="text" name="description" id="description" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </div>
+        </div>
+        </div> 
+
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+        <!-- Project Commence Date -->
+        <div>
+          <label for="projectStartDate" class="block text-sm font-medium text-gray-700">Project Commence Date *</label>
+          <input type="date" name="projectStartDate" id="projectStartDate"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Project End Date -->
+        <div>
+          <label for="projectDueDate" class="block text-sm font-medium text-gray-700">Project End Date *</label>
+          <input type="date" name="projectDueDate" id="projectDueDate"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+         <!-- Project Status -->
+        <div>
+          <label for="projectStatus" class="block text-sm font-medium text-gray-700">Project Status *</label>
+          <select name="projectStatus" id="projectStatus" required disabled class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <option value="Active" selected>Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <input type="hidden" name="projectStatus" id="hiddenprojectStatus" value="Active">
+        </div>
+
+        <!-- BMGF Project -->
+        <div>
+          <div class="flex flex-col items-center justify-center">
+          <label for="bmgfProjectFinance" class="block mb-2  text-sm font-medium text-gray-700">Deliverable-based Project:</label>
+          <input type="checkbox" name="bmgfProjectFinance" id="bmgfProjectFinance"  class="mt-1 h-4 w-4 text-secondary-600 border-gray-300 rounded focus:ring-secondary-500">
+        </div>
+        </div>
+      </div>  
+
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+
+        <!-- Contract Total Fees -->
+       <div>
+          <label for="contractTotalFees" class="block text-sm font-medium text-gray-700">Contract Total Fees ($)</label>
+          <input  min="0" name="contractTotalFees" id="contractTotalFees"  class="auto-numeric mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Contract Total Expenses -->
+        <div>
+          <label for="contractTotalExpenses" class="block text-sm font-medium text-gray-700">Contract Total Expenses($)</label>
+          <input  min="0" name="contractTotalExpenses" id="contractTotalExpenses" class="auto-numeric mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Contract Total Overhead -->
+        <div>
+          <label for="contractTotalOverhead" class="block text-sm font-medium text-gray-700">Contract Total Overhead ($)</label>
+          <input  min="0" name="contractTotalOverhead" id="contractTotalOverhead"  class="auto-numeric mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Contract Total Value -->
+        <div>
+          <label for="" class="block text-sm font-medium text-gray-700">Contract Total Value ($)</label>
+          <input  min="0" name="" id="contractTotalValue"  disabled class="auto-numeric mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        </div>
+
+
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit" id="addProjectBtn" class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Add Project
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--- Footer Here -->

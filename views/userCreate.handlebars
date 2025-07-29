@@ -1,0 +1,83 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeUsers=true}}
+
+  <div class="md:col-span-9 ml-10">
+    <div class=" text-gray-500 text-sm italic">
+         HRIS / <a href="/users">Users / </a>
+        <span id="userCreate">User Creation</span>
+    </div>
+    <div id="successMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-green-600 rounded-lg hidden">
+      <span>Success Message</span>
+    </div>
+    <div id="errorMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-secondary-500 rounded-lg hidden">
+      <span>Error Message</span>
+    </div>
+  <div class="container mx-auto mt-10 my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h2 class="font-bold mb-16 text-left">Add New User</h2>
+    <form id="userCreateForm" method="POST" enctype="multipart/form-data">
+    <p class="py-5 text-xs">All fields marked with * are required</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 mb-10 gap-6">
+        
+        <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium ">User Name *</label>
+        <input type="text" name="userName" id="userName" required class="mt-1 block w-full px-3 py-2 border rounded-md">
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium">User Email *</label>
+        <input type="email" name="userEmail" id="userEmail" required class="mt-1 block w-full px-3 py-2 border rounded-md">
+      </div>
+
+      <!-- Role -->
+      <div>
+        <label for="role" class="block text-sm font-medium">User Role</label>
+        <select name="userRole" id="userRole" required class="mt-1 block w-full px-3 py-2 border rounded-md">
+          <option value="user">User</option>
+          <option value="leader">Leader</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="manager">Manager</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <!-- Consultant Dropdown -->
+      <div>
+        <label for="consultant" class="block text-sm font-medium">Assign Consultant</label>
+        <select name="consultant" id="consultant_Id" required class="mt-1 block w-full px-3 py-2 border rounded-md">
+          <option value="">Select a Consultant</option>
+          {{#each consultants}}
+            <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+   
+
+    <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-medium">Password</label>
+        <input type="password" name="password" id="password" required 
+               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+      </div>
+
+      <!-- Password Confirmation -->
+      <div>
+        <label for="passwordConfirmation" class="block text-sm font-medium">Confirm Password</label>
+        <input type="password" name="passwordConfirmation" id="passwordConfirmation" required 
+               class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+      </div>
+
+    </div>
+
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit" id="addUserBtn" class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Add User
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--- Footer Here -->

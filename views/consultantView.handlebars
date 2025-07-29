@@ -1,0 +1,221 @@
+
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeConsultants=true}}
+      
+      
+        <!------------CENTER CONTENT------------------------>
+      <div class="md:col-span-9 ml-10">
+        <div class=" text-gray-500 text-sm italic">
+        HRIS / <a href="/consultants">Consultants / </a>
+        <span>Consultant Overview</span>
+        </div>
+        <div class="relative mt-20 h-64 bg-cover bg-center rounded-lg" style="background-image: url('/img/background_image_consultants.webp');">
+          <div class="absolute inset-0 bg-gradient-to-r from-secondary-600 bg-opacity-50 flex items-center justify-center rounded-lg ">
+            <h2 class="text-3xl font-bold text-white">{{consultant.name}}</h2>
+          </div>
+        </div>
+        <!------------Profile Card------------------------>
+        <div class="relative -mt-20 mx-5 p-5 bg-white bg-opacity-30 backdrop-filter backdrop-blur-lg rounded-xl shadow-lg flex justify-between items-center">
+          <div class="flex gap-4">
+    
+            <div class="flex flex-col justify-center text-secondary-200">
+              <span class="font-bold text-xl">{{consultant.name}}</span>
+              <span>{{consultant.designation}}</span>
+              <span>{{consultant.companyEmailAddress}}</span>
+            </div>
+          </div>
+          <div class="flex flex-col justify-end text-right text-secondary-200">
+            <div class="flex gap-2 items-center">
+              <span class="font-bold text-sm">Contract End:</span>
+              <span class="{{#if (isWithinOrBeforeCurrentMonth consultant.contractEndDate)}}text-secondary-500{{else}}text-gray-600{{/if}}">
+                {{formatDate consultant.contractEndDate}}
+              </span>
+            </div>
+            <div class="flex gap-2 items-center">
+              <span class="font-bold text-sm">Status:</span>
+              {{#if (eq consultant.consultantStatus "Inactive")}}
+              <span class="text-red-500">{{consultant.consultantStatus}}</span>
+              {{else}}
+              <span class="text-secondary-200">{{consultant.consultantStatus}}</span>
+              {{/if}}
+            </div>
+          </div>
+          </div>
+        <!------------ Cards ------------------------>
+        <div class="flex gap-3">
+          <!------------Contract Details Card------------------------>
+          <div class="w-full max-w-full px-3 xl:w-6/12 mt-5 rounded-lg shadow-md bg-white">
+            <div class="p-5">
+              <span class="text-lg lg:text-xl mb-6 block text-secondary-200">Contract Details</span>
+              <div class="text-sm lg:text-base flex flex-col space-y-2">
+                <div>
+                  <span class="font-semibold">Contract Number:</span>
+                  <span class="font-light">{{consultant.contractNumber}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Consultant Category:</span>
+                  <span class="font-light">{{consultant.consultantCategory}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Contract Start Date:</span>
+                  <span class="font-light">{{formatDate consultant.contractStartDate}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Line Manager:</span>
+                  <a href="/consultant/{{consultant.lineManager._id}}"> <span class="font-light">{{consultant.lineManager.name}}</span></a>
+                </div>
+                <div class="flex">
+                  <span class="font-semibold">Contract:</span>
+                  {{#if consultant.contractUrl}}
+              <a href="{{consultant.contractUrl}}" target="_blank" class="text-secondary-600 flex items-center font-light">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                </svg>
+                View Contract
+              </a>
+            {{else}}
+              <span class="px-1 font-light"> No document attached</span>
+            {{/if}}
+                </div>
+              </div> 
+            </div>
+          </div>
+          <!------------ Salary Card------------------------>
+          <div class="w-full max-w-full px-3 xl:w-6/12 mt-5 rounded-lg shadow-md bg-white">
+            <div class="p-5">
+              <span class="text-lg lg:text-xl mb-6 block text-secondary-200">Salary Details</span>
+              <div class="text-sm lg:text-base flex flex-col space-y-2">
+                <div class="block">
+                  <span class="font-semibold">Salary Rate:</span>
+                  <span class="font-light">{{consultant.salaryRate}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Salary:</span>
+                  <span class="font-light">{{formatMoney consultant.salary}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">No of Working Days per Month:</span>
+                  <span class="font-light">{{consultant.noOfWorkingDaysPerMonth}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">No of Working Hours per Month:</span>
+                  <span class="font-light">{{consultant.noOfWorkingHoursPerMonth}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!------------Benefits Details Card------------------------>
+        <div class="flex gap-3">
+          <div class="w-full max-w-full px-3 xl:w-6/12 mt-5 rounded-lg shadow-md bg-white">
+            <div class="p-5">
+              <span class="text-lg lg:text-xl mb-6 block text-secondary-200">Contractual Benefits</span>
+              <div class="text-sm lg:text-base flex gap-2 flex-wrap">
+                {{#each consultant.contractualBenefits}}
+                <div class="flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <span class="font-light text-sm text-secondary-200">{{this}}</span>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+          <!------------IR35 Details Card------------------------>
+          <div class="w-full max-w-full px-3 xl:w-6/12 mt-5 rounded-lg shadow-md bg-white">
+            <div class="p-5 ">
+              <div class="mb-6 flex gap-2 align-middle items-center">
+                <span class="text-lg lg:text-xl  block text-secondary-200">IR35 Compliance</span>
+                <input id="option1" type="checkbox" class="form-checkbox h-5 w-5 accent-secondary-600 font-light" {{#if consultant.ir35Compliance.compliance}}checked{{/if}}>
+              </div>
+              <div class="text-sm lg:text-base flex justify-between gap-20">
+                <div>
+                  <span class="font-semibold">Description of IR35:</span>
+                  <span class="font-light">{{consultant.ir35Compliance.description}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div> 
+          <!------------ Personal details cards------------------------>
+          <div class="w-full max-w-full px-3 xl:w-12/12 mt-5 rounded-lg shadow-md bg-white">
+            <div class="p-5">
+              <span class="text-lg lg:text-xl mb-4 block text-secondary-200">Personal Details</span>
+              <div class="text-sm lg:text-base flex flex-col space-y-2">
+                <div class="block">
+                  <span class="font-semibold">Address:</span>
+                  <span class="font-light">{{consultant.address}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Contact No:</span>
+                  <span class="font-light">{{consultant.contactNumber}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Emergency Contact Number:</span>
+                  <span class="font-light">{{consultant.emergencyContactNumber}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Based Country:</span>
+                  <span class="font-light">{{consultant.basedCountry}}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">Nationality:</span>
+                  <span class="font-light">{{consultant.nationality}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <!------------Project Leadership ------------------------>
+            <div class="w-full max-w-full px-3 xl:w-12/12 mt-5 mb-4 rounded-lg shadow-md bg-white">
+              <div class="p-5">
+                {{!-- <span class="text-lg lg:text-xl mb-4 block text-secondary-200">Projects</span> --}}
+                <div class="text-sm lg:text-base space-y-1">
+                  <span class="font-semibold">Project Leadership:</span>
+                  <span class="font-light">{{{extractProjectNames consultant.projectsLed}}}</span>
+                </div>
+              </div>
+            </div>
+            <!------------ Milestones card------------------------>
+            <div class="container mx-auto mt-10 mb-10">
+              <div class="mb-6">
+               <h2 class="font-semibold text-lg p-5 pb-2 border-b border-gray-300">Assigned Deliverables / Phases</h2>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+             {{#each consultant.assignedMilestones}}
+                <div class="p-4  text-secondary-200 shadow-lg rounded-lg bg-white">
+                  <div class="flex flex-col space-y-2">
+                    <div class="flex gap-3">
+                      <span class="font-semibold block">Project:</span>
+                      <span class="text-secondary-200">{{this.project}}</span>
+                    </div>
+                    <div class="flex gap-3">
+                      <span class="font-semibold block">Milestone:</span>
+                      <a href="/milestones/{{this.id}}" class=" text-secondary-200 hover:underline">{{this.name}}</a>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div> 
+            </div> 
+         <!------------ ------------------------>
+          <div class="mt-8 mb-5">
+          <a  href="/consultant/{{consultant._id}}/edit" >
+        <button class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Edit Consultant 
+        </button>
+        </a>
+      </div>
+        </div>
+        </div>
+       </div> 
+      
+        <div class="mb-2"></div>
+        <!--- Footer Here-->
+        
+      </div>
+    </div>
+  </body>
+</html> 
+

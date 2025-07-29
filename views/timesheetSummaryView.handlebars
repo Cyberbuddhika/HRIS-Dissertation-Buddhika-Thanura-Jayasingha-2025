@@ -1,0 +1,169 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeTimesheetProcessView=true}}
+
+  <div id="timesheetSummaryView-module" class="col-span-12 container mx-auto px-4">
+    {{!-- <div id="timesheetModal" ></div> --}}
+
+    <!-- Header Section -->
+    <div class="flex justify-between  items-start mt-6 mb-6">
+      <div class="flex space-x-4 mb-4">
+        <select id="month" class="p-2 border border-gray-300 rounded">
+          <option value="0">January</option>
+          <option value="1">February</option>
+          <option value="2">March</option>
+          <option value="3">April</option>
+          <option value="4">May</option>
+          <option value="5">June</option>
+          <option value="6">July</option>
+          <option value="7">August</option>
+          <option value="8">September</option>
+          <option value="9">October</option>
+          <option value="10">November</option>
+          <option value="11">December</option>
+        </select>
+
+        <select id="year" class="p-2 border border-gray-300 rounded">
+          <!-- You can adjust the year range as needed -->
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+      </div> 
+     </div>
+
+        {{!-- <select id="consultants" class="p-2 border border-gray-300 rounded">
+          <!-- You can adjust the year range as needed -->
+          <option value="">Select a Consultant</option> 
+        </select>
+
+        <button id="viewCalendarBtn"  class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">View Calendar</button> --}}
+       
+      {{!-- <div class="flex gap-2">
+        <button id="approveButton" class="m1-auto px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">Approve</button>
+        <button id="revertToDraftButton" class="m1-auto px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">Unlock for Editing</button>
+      </div>  --}}
+   
+
+    <h2 class="text-xl font-semibold mb-4">Timesheets Summary </h2>
+
+    <!-- Timesheet Summary Table -->
+    <table id="timesheetTable" class="w-full text-sm table-auto border-collapse border border-gray-300">
+  <thead id="timesheetTableHead">
+    <tr>
+      <th class="border px-4 py-2" rowspan="2">Consultant Name</th>
+      <th class="border px-4 py-2" rowspan="2">Total Worked Hours</th>
+      <th class="border px-4 py-2" rowspan="2">Total Worked Days</th>
+      <th id="milestoneHeader" class="border px-4 py-2" colspan="1">Deliverable Summary</th>
+      <th class="border px-4 py-2 w-[180px]" rowspan="2">Leave Summary</th>
+    </tr>
+    <tr>
+      {{#each milestoneHeaders}}
+        <th class="border px-4 py-2">{{this}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody id="timesheetTableBody">
+    {{#each consultants}}
+      <tr>
+        <td class="border px-4 py-2">{{this.consultantName}}</td>
+        <td class="border px-4 py-2">{{this.workedHours}} hrs</td>
+        <td class="border px-4 py-2">{{this.workedDays}} days</td>
+        {{#each ../milestoneHeaders}}
+          <td class="border px-4 py-2">
+            {{lookup ../this.milestoneSummary this}} hrs
+          </td>
+        {{/each}}
+        <td class="border px-4 py-2">
+          {{#each this.leaveSummary}}
+            {{@key}}: {{this}} days <br>
+          {{/each}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<button id="printTableBtn" class="px-4 py-2 mt-4 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-700">
+  Print Timesheets Summary
+</button>
+
+
+
+     
+    {{!-- <div id="consultantNameContainer" class="flex flex-col  mt-6 mb-8 hidden">
+        <div id="consultant-name" class="text-2xl font-bold"></div>
+        <div id="consultant-designation" class="text-sm"></div>
+    </div>
+    
+    <!-- Inline Summary Section -->
+    <div class="bg-secondary-900 p-3 rounded-lg mb-10">
+      <div class="flex justify-between mt-4 text-center space-x-4">
+        <div class="flex flex-col items-center">
+          <div class="text-sm text-black">Reported time this month</div>
+          <div id="reported-time" class="text-2xl font-bold"></div>
+          
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="text-sm text-black">Contract maximum working hours / days</div>
+          <div id="consultant-working-hours-days" class="text-2xl font-bold"></div>
+        </div>
+        {{!-- <div class="flex flex-col items-center">
+          <div class="text-sm text-black">Overtime this month</div>
+          <div class="text-2xl font-bold">1h</div>
+        </div> --}}
+        <div id="leave-summary" class="flex flex-row gap-4 space-x-6">
+          {{!-- <div class="text-sm text-black">Day off this month</div>
+          <div id="days-off" class="text-2xl font-bold"></div> --}}
+          {{!-- <div id="leave-summary" class="flex flex-col space-y-2"></div> --}}
+        </div>
+      </div>
+
+      <!-- Summary Section -->
+      <div class="mt-8 mb-6">
+        <div class="text-lg font-semibold mb-4"></div>
+        <div id="milestone-box" class="flex space-x-4">
+          
+          <!-- Additional milestone boxes can be added as needed -->
+        </div>
+      </div>
+     </div>  --}}
+
+    <!-- Calendar Section -->
+    {{!-- <div class="container mx-auto">
+
+      <!-- Calendar Table -->
+      <table class="table-auto border-collapse w-full">
+        <!-- Table Header for Days of the Week -->
+        <thead id="calendarHead">
+
+        </thead>
+        <tbody id="calendarBody">
+        
+        </tbody>
+        
+      </table>
+
+    </div>
+   --}}
+    
+
+    {{!-- <!-- Submit Button -->
+    <div class="mt-4 flex justify-end">
+      <button id="submitEntry" class="m1-auto px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+        Submit
+      </button>
+    </div> --}}
+    
+    {{!-- <!-- Existing Entries List -->
+    <div id="existingEntriesContainer" class="mt-4">
+      <h3 class="text-md font-semibold">Existing Entries</h3>
+      <div id="existingEntries" class="space-y-2">
+        <!-- Existing timesheet entries will be dynamically added here -->
+      </div>
+    </div> --}}
+  {{!-- </div>
+</div>
+</div> --}}
+  </div>
+</div>

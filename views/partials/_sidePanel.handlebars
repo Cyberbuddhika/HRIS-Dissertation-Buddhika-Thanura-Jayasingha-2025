@@ -1,0 +1,203 @@
+{{!-- <div class="md:col-span-2 w-64 max-w-xs "> --}}
+<div class="fixed top-0 left-0 h-screen w-60 bg-secondary-900 shadow-lg z-10">
+  <nav>
+    <div class="p-5 flex justify-around items-center">
+      <a href="/"><h1 class="text-secondary-200 font-bold">HRIS</h1></a>
+      <img src="/img/HRIS-logo.webp" alt="FutureFish Logo" class="w-20">
+    </div>
+    <div class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent"></div>
+  </nav>
+  <nav class="p-8 text-secondary-200 select-none">
+    <div class="flex flex-col space-y-4">
+      <div class="flex flex-col rounded-lg w-full hidden consultants">
+        <div id="consultant" class="p-2 mb-2 flex items-center  hover:cursor-pointer rounded-lg  {{#if activeConsultants}}bg-white shadow-lg is-open{{/if}}">
+          <div class="flex items-center  hover:cursor-pointer rounded-lg  transition duration-300 ease-in-out transform hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="p-2 size-8 rounded-lg bg-white shadow-xl {{#if activeConsultants}}text-secondary-200 shadow-none{{/if}}">
+            <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0ZM15.75 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM2.25 9.75a3 3 0 1 1 6 0 3 3 0 0 1-6 0ZM6.31 15.117A6.745 6.745 0 0 1 12 12a6.745 6.745 0 0 1 6.709 7.498.75.75 0 0 1-.372.568A12.696 12.696 0 0 1 12 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 0 1-.372-.568 6.787 6.787 0 0 1 1.019-4.38Z" clip-rule="evenodd"/>
+            <path d="M5.082 14.254a8.287 8.287 0 0 0-1.308 5.135 9.687 9.687 0 0 1-1.764-.44l-.115-.04a.563.563 0 0 1-.373-.487l-.01-.121a3.75 3.75 0 0 1 3.57-4.047ZM20.226 19.389a8.287 8.287 0 0 0-1.308-5.135 3.75 3.75 0 0 1 3.57 4.047l-.01.121a.563.563 0 0 1-.373.486l-.115.04c-.567.2-1.156.349-1.764.441Z"/>
+          </svg>
+          <span class="p-2 font-bold">Consultants</span>
+          <svg id="consultantDownArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+            <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
+          </svg>
+          <svg id="consultantUpArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3 hidden">
+            <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
+          </svg>
+
+          </div>
+        </div>
+        <div id="consultantContainer" class="flex flex-col overflow-hidden max-h-0 {{#if activeConsultants}}max-h-96 is-open{{/if}} transition-all duration-300 ease-in-out">
+          <div class="pb-2 flex flex-row items-center">
+            <a href="/consultants" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Overview</span>
+            </a>
+          </div>
+          <div class="pb-2 flex flex-row items-center hidden consultant-create">
+            <a href="/consultant/new" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Create New</span>
+            </a>
+          </div>
+  
+        </div>
+      </div>
+      <div class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent hidden consultants"></div>
+      <div class="flex flex-col rounded-lg w-full hidden projects">
+        <div id="project" class="p-2 mb-2 flex items-center select-none hover:cursor-pointer rounded-lg {{#if activeProjects}}bg-white shadow-lg is-open{{/if}}">
+          <div class="flex items-center select-none hover:cursor-pointer rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="p-2 size-8 rounded-lg bg-white shadow-xl {{#if activeProjects}}text-secondary-200 shadow-none{{/if}}">
+              <path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03ZM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 0 0 .372-.648V7.93ZM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 0 0 .372.648l8.628 5.033Z"/>
+            </svg>
+            <span class="p-2 font-bold">Projects</span>
+            <svg id="projectDownArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+              <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
+            </svg>
+            <svg id="projectUpArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3 hidden">
+              <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <div id="projectContainer" class="flex flex-col overflow-hidden max-h-0 {{#if activeProjects}}max-h-96 is-open{{/if}} transition-all duration-300 ease-in-out">
+          <div class="pb-2 flex flex-row items-center">
+            <a href="/projects" class="flex items-center">
+              <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+              <span class="pl-2 hover:font-bold">Overview</span>
+            </a>
+          </div>
+          <div class="pb-2 flex flex-row items-center hidden project-create">
+            <a href="/projects/new" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Create New</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent hidden projects"></div>
+      <div class="flex flex-col rounded-lg w-full">
+        <div id=timesheet class="p-2 mb-2 flex items-center select-none hover:cursor-pointer rounded-lg {{#if activeTimesheet}}bg-white shadow-lg is-open{{/if}}">
+          <div class="flex items-center select-none hover:cursor-pointer rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="p-2 size-8 rounded-lg bg-white shadow-xl {{#if activeTimesheet}}text-secondary-200 shadow-none{{/if}}">
+              <path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03ZM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 0 0 .372-.648V7.93ZM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 0 0 .372.648l8.628 5.033Z"/>
+            </svg>
+            <span class="p-2 font-bold">Timesheet</span>
+            <svg id="timesheetDownArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+              <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
+            </svg>
+            <svg id="timesheetUpArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3 hidden">
+              <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <div id="timesheetContainer" class="flex flex-col overflow-hidden max-h-0 {{#if activeTimesheet}}max-h-96 is-open{{/if}} transition-all duration-300 ease-in-out">
+          <div class="pb-2 flex flex-row items-center">
+            <a href="/timesheet" class="flex items-center">
+              <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+              <span class="pl-2 hover:font-bold">Active</span>
+            </a>
+          </div>
+          <div class="pb-2 flex flex-row items-center hidden timesheet-approve">
+            <a href="/timesheetApprovalView" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Approval</span>
+            </a>
+          </div>
+          <div class="pb-2 flex flex-row items-center hidden timesheet-operations">
+            <a href="/timesheetSummaryView" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Summary</span>
+            </a>
+          </div>
+          <div class="pb-2 flex flex-row items-center hidden timesheet-operations">
+            <a href="/timesheetProcessView" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Process</span>
+            </a>
+            </div>
+          <div class="pb-2 flex flex-row items-center hidden timesheet-report">
+            <a href="/timesheetReportView" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Reports</span>
+            </a>
+          </div>
+
+          </div>
+          
+      </div>
+      <div class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent "></div>
+
+      <div class="flex flex-col rounded-lg w-full hidden user">
+        <div id="user" class="p-2 mb-2 flex items-center select-none hover:cursor-pointer rounded-lg {{#if activeUsers}}bg-white shadow-lg is-open{{/if}}">
+          <div class="flex items-center select-none hover:cursor-pointer rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="p-2 size-8 rounded-lg bg-white shadow-xl {{#if activeUsers}}text-secondary-200 shadow-none{{/if}}">
+              <path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03ZM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 0 0 .372-.648V7.93ZM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 0 0 .372.648l8.628 5.033Z"/>
+            </svg>
+            <span class="p-2 font-bold">Users</span>
+            <svg id="userDownArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+              <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
+            </svg>
+            <svg id="userUpArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3 hidden">
+              <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        
+        <div id="userContainer" class="flex flex-col overflow-hidden max-h-0 {{#if activeUsers}}max-h-96 is-open{{/if}} transition-all duration-300 ease-in-out">
+          <div class="pb-2 flex flex-row items-center">
+            <a href="/users" class="flex items-center">
+              <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+              <span class="pl-2 hover:font-bold">Overview</span>
+            </a>
+          </div>
+          <div class="pb-2 flex flex-row items-center">
+            <a href="/users/new" class="flex items-center">
+            <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+            <span class="pl-2 hover:font-bold">Create New</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent hidden user"></div>
+
+      <div class="flex flex-col rounded-lg w-full ">
+        <div id="profile" class="p-2 mb-2 flex items-center select-none hover:cursor-pointer rounded-lg {{#if activeMe}}bg-white shadow-lg is-open{{/if}}">
+          <div class="flex items-center select-none hover:cursor-pointer rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="p-2 size-8 rounded-lg bg-white shadow-xl {{#if activeUsers}}text-secondary-200 shadow-none{{/if}}">
+              <path d="M12.378 1.602a.75.75 0 0 0-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03ZM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 0 0 .372-.648V7.93ZM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 0 0 .372.648l8.628 5.033Z"/>
+            </svg>
+            <span class="p-2 font-bold">Profile</span>
+            <svg id="profileDownArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+              <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd" />
+            </svg>
+            <svg id="profileUpArrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3 hidden">
+              <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 0 1-1.06-1.06l7.5-7.5Z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <div id="profileContainer" class="flex flex-col overflow-hidden max-h-0 {{#if activeMe}}max-h-96 is-open{{/if}} transition-all duration-300 ease-in-out">
+          <div class="pb-2 flex flex-row items-center">
+            <a href="/me" class="flex items-center">
+              <div class="ml-5 mr-3 bg-secondary-200 rounded-full size-2"></div>
+              <span class="pl-2 hover:font-bold">My Profile</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+      <div class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent"></div>
+
+    </div>
+  </nav>
+  <!-- logout button -->
+  <div id="logout-btn" class="mt-auto">
+    <div class="px-10">
+        <div id="logout" class="flex cursor-pointer p-3 rounded-lg w-full bg-white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-primary hover:text-red-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
+          </svg>
+          <sapn>Logout</sapn>
+        </div>
+    </div>
+  </div>  
+</div>

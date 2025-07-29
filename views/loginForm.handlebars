@@ -1,0 +1,81 @@
+<div class="flex h-screen">
+  <!-- Left Pane -->
+  <div class="hidden flex-1 items-center justify-center bg-white lg:flex">
+    <div class="h-full w-full">
+      <img
+        src="/img/login.webp"
+        alt="Placeholder Image"
+        class="h-full w-full object-cover"
+      />
+    </div>
+  </div>
+
+  <!-- Right Pane -->
+
+  <div class="flex w-full items-center justify-center bg-gray-100 lg:w-1/2">
+
+    <div class="w-full max-w-md p-6">
+      <!-- Alert Message for Errors -->
+      <div class="alert alert-warning mb-10">
+        {{#if error}}
+          <p
+            class="mx-auto mt-8 h-auto w-auto items-center rounded-lg bg-secondary-500 px-2 py-3 text-center text-white"
+          >{{error}}</p>
+        {{/if}}
+      </div>
+      <h1
+        class="mb-6 text-center text-3xl font-semibold text-secondary-600"
+      >Login</h1>
+      <h1 class="mb-6 text-center text-sm font-semibold text-primary">
+        Human Resources Information System
+      </h1>
+      <form
+        action="/api/v1/users/login"
+        method="POST"
+        id="loginForm"
+        class="space-y-4"
+      >
+        <!-- Your form elements go here -->
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700"
+          >Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+          />
+        </div>
+
+        <div>
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700"
+          >Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="mt-1 w-full rounded-md border p-2 transition-colors duration-300 focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+          />
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="w-full rounded-md bg-secondary-800 p-2 text-white transition-colors duration-300 hover:bg-secondary-600 focus:bg-secondary-600 focus:outline-none focus:ring-2 focus:ring-secondary-600 focus:ring-offset-2"
+          >Login</button>
+        </div>
+      </form>
+      <div class="mt-4 text-center text-sm text-gray-600">
+        <p>Don't have an account? Contact Operations.
+        </p>
+      </div>
+      <div class="mt-2 text-center text-xs text-gray-400">
+        Designed & Developed by
+        <a href="https://github.com/Cyberbuddhika">@cyberbuddhika</a>
+      </div>
+    </div>
+  </div>
+</div>

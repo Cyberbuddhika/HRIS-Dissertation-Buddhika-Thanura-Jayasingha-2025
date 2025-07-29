@@ -1,0 +1,44 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+    .sortable::after {
+      content: '\2191\2193'; /* Unicode arrows for sort indicator */
+      font-size: 0.8em;
+      padding-left: 0.5em;
+    }
+    .sortable.asc::after {
+      content: '\2191'; /* Up arrow */
+    }
+    .sortable.desc::after {
+      content: '\2193'; /* Down arrow */
+    }
+  </style>
+</head>
+<!-- Include the header -->
+  {{> _header}}
+  </head>
+  <body class="bg-white font-inter text-secondary-200">
+    {{{body}}}
+    <!-- Global Reusable Modal -->
+    <div id="customModal" class="fixed inset-0 flex items-center justify-center bg-primary bg-opacity-50 backdrop-blur-lg hidden">
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <h2 id="modalTitle" class="text-lg font-semibold mb-2">Notification</h2>
+        <p id="modalMessage" class="text-primary"></p>
+        <div class="flex gap-4 justify-center mt-4">
+          <button id="modalCancel" class="px-4 py-2 bg-secondary-500 text-white rounded mr-2 hidden">Cancel</button>
+          <button id="modalConfirm" class="px-4 py-2 bg-secondary-600 text-white rounded">OK</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" defer src="/dist/script.js"></script>
+
+  </body>
+</html>

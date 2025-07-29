@@ -1,0 +1,187 @@
+
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeMilestones=true}}
+
+      <!---------------CENTER CONTENT--------------------------->
+      <div class="md:col-span-9 ml-10">
+        <div class=" text-gray-500 text-sm italic">
+        HRIS / <a href="/projects/{{milestone.project._id}}">{{milestone.project.name}} / </a>
+        <span>Deliverable Overview</span>
+        </div>
+      <!------------CARDS row -1 -------------------------------------->
+        <div class="flex gap-3 items-center">
+      <!------------MILESTONE DATA CARD ------------------------->
+          <div class="w-full max-w-full mt-20 mb-2 px-3 xl:w-8/12 text-sm rounded-lg shadow-md bg-white">
+          {{!-- MILESTONE NAME --}}
+            <div class="p-5 mb-2 flex flex-col">
+                <span class="text-xl text-secondary-200 font-bold">{{milestone.name}}
+                </span>
+                <a href="/projects/{{milestone.project._id}}"><span class="text-sm text-gray-500 italic">{{milestone.project.name}}</span> </a>
+            </div> 
+             
+            {{!-- DATES--}}
+            <div class="flex pl-5 gap-10 pb-7">
+              {{#if milestone.bmgfProjectFinance}} 
+              <div class="flex flex-row gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-green-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable Commence Date:</span>
+                    <span class="font-semibold text-sm">{{formatDate milestone.milestoneStartDate}}</span>
+                  </div>
+              </div>
+              <div class="flex flex-row pl-5 gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable End Date:</span>
+                    <span class="font-semibold text-sm">{{formatDate milestone.milestoneDueDate}}</span>
+                  </div>
+              </div>
+              {{/if}}
+              <div class="flex flex-row pl-5 gap-2">
+                 {{#if (eq milestone.milestoneStatus "Inactive")}}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable Status:</span>
+                    <span class="text-red-500 font-semibold text-sm">{{milestone.milestoneStatus}}</span>
+                  </div>  
+                 {{else}}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable Status:</span>
+                    <span class="text-secondary-200 font-semibold text-sm">{{milestone.milestoneStatus}}</span>
+                  </div>
+                 {{/if}}
+              </div>
+            </div> 
+            
+            {{!-- DESCRIPTION--}} 
+            <div class="flex flex-col pb-5 pl-5">
+                <span class="pb-2 font-semibold">Description:</span>
+                <span class="font-light">{{milestone.description}}</span>
+            </div> 
+            {{!-- MILESTONE LEADER--}} 
+            <div class="flex flex-col pb-5 pl-5">
+                <span class="font-semibold">Deliverable Leader:</span>
+               <a href="/consultant/{{milestone.milestoneLeader._id}}"> <span class="font-light">{{milestone.milestoneLeader.name}}</span></a>
+              </div>
+            {{!-- OTHER--}}
+            <div class="text-sm flex flex-col pb-6 space-y-2 pl-5">
+              <div>
+                <span class="font-semibold">Programme Geography:</span>
+                <span class="font-light">{{milestone.milestoneCountry}}, {{milestone.milestoneLocation}}</span>
+              </div>
+            </div>
+            {{!-- NOTE--}} 
+            <div class="flex flex-col pb-5 pl-5">
+                <span class="pb-2 font-semibold">Note:</span>
+                <span class="font-light">{{milestone.milestoneNote}}</span>
+            </div> 
+            {{!-- {{/if}} --}}
+          </div> <!------------END OF MILESTONE DATA CARD ------------------------->
+          <!------------ FEES CARD  ------------------------->
+          <div class="w-full max-w-full mt-20 mb-2 px-3 xl:w-4/12">   
+            {{!-- FEED--}}
+            {{#if milestone.bmgfProjectFinance}} 
+              <div class="flex items-center justify-items-center p-4  mb-2 flex-row gap-2 text-slate-100 bg-secondary-200 rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-green-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-50">Deliverable Total Value:</span>
+                    <span class="font-semibold text-sm">{{formatMoney milestone.milestoneTotalValue}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-4  mb-2 flex-row gap-2 bg-white rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-yellow-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable Total Fees:</span>
+                    <span class="font-semibold text-sm">{{formatMoney milestone.milestoneTotalFeeBudget}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-4 mt-2 mb-2 flex-row gap-2 bg-white rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable Total Expenses:</span>
+                    <span class="font-semibold text-sm">{{formatMoney milestone.milestoneTotalExpenseBudget}}</span>
+                  </div>
+              </div>
+              <div class="flex items-center justify-items-center p-4 mt-2 mb-2 flex-row gap-2 bg-white rounded-lg shadow-md">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7 text-secondary-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+                  </svg>
+                  <div class="flex flex-col">
+                    <span class="font-light text-sm text-slate-500">Deliverable Total Overhead:</span>
+                    <span class="font-semibold text-sm">{{formatMoney milestone.milestoneTotalOverhead}}</span>
+                  </div>
+              </div>
+              {{/if}}
+          </div><!------------ END OF FEES CARD -------------------------------------->
+        </div> <!------------END OF CARDS (row -1 ) ------------------------->
+        <!------------CARDS row -2 -------------------------------------->
+      <div class="flex gap-3 items-center">
+        <div class="container mx-auto mt-2 xl:w-8/12">
+        <div class="mb-6">
+            <h2 class="font-semibold text-lg pb-2 border-b border-gray-300">Consultants</h2>
+        </div>
+       <div class=" bg-white rounded-lg">
+        <table id="consultantsTable" class="table-auto w-full border-collapse">
+          <thead>
+            <tr class="text-secondary-200 align-top text-xs lg:text-sm leading-normal">
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="name">Name</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="designation">Designation</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="consultantCategory">Category</th>
+            </tr>
+          </thead>
+          <tbody id="consultantsTableBody" class="text-gray-600 text-xs lg:text-sm font-light">
+            {{#each milestone.consultants}}
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
+              <td data-column="name" class="py-3 px-4 text-left">
+                <a href="/consultant/{{this.consultant._id}}" class="flex items-center space-x-2 text-secondary-400 hover:underline">
+                  {{#if this.consultant.profilePicture}}
+                    <img src="{{this.consultant.profilePicture}}" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                  {{/if}}
+                  <span>{{this.consultant.name}}</span>
+                </a>
+              </td>
+              <td data-column="designation" class="py-3 px-4 text-left">{{this.consultant.designation}}</td>
+              <td data-column="consultantCategory" class="py-3 px-4 text-left">{{this.consultant.consultantCategory}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+        </div>
+      <div class="w-full max-w-full mt-2 mb-2 px-3 xl:w-4/12">
+          <img
+        src="{{milestone.mapUrl}}"
+    alt="Map of the Deliverable Location"
+      />
+      </div>
+
+
+        </div> <!------------END OF CARDS (row -2 ) -------------------------> 
+         <div class="mt-1 mb-5">
+          <a  href="/milestones/{{milestone._id}}/edit" >
+        <button class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Edit Deliverable 
+        </button>
+        </a>
+      </div>
+        </div>
+      </div> <!---------------END OF CENTER CONTENT--------------------------->  
+ 
+
+
+

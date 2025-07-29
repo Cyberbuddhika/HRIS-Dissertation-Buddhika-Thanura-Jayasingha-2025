@@ -1,0 +1,106 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeTimesheetReportView=true}}
+
+  <div id="timesheetReportView-module" class="col-span-12 container mx-auto px-4">
+    {{!-- <div id="timesheetModal" ></div> --}}
+
+    <!-- Header Section -->
+    <div class="flex justify-between  items-start mt-6 mb-6">
+      {{!-- Report name --}}
+      <div class="flex space-x-4 mb-4">
+        <div class="flex flex-col">
+          <label for="reportType" class="text-sm font-bold text-gray-700">Report</label>
+          <select id="reportType" class="p-2 border border-gray-300 text-sm rounded w-56">
+            <option value="">Select a report</option>
+            <option value="milestoneHours">Deliverable with Hours for Period</option>
+            <option value="allMilestones">All Deliverables with Hours for Period</option>
+          </select>
+        </div>
+      {{!-- From Period --}}
+      <div class="flex flex-col px-2 py-2 bg-gray-200">
+        <label class="text-sm font-bold text-gray-700">From</label>
+      <div class="flex gap-2">
+        <select id="fromMonth" class="p-2 border border-gray-300 text-sm rounded">
+          <option value="0">January</option>
+          <option value="1">February</option>
+          <option value="2">March</option>
+          <option value="3">April</option>
+          <option value="4">May</option>
+          <option value="5">June</option>
+          <option value="6">July</option>
+          <option value="7">August</option>
+          <option value="8">September</option>
+          <option value="9">October</option>
+          <option value="10">November</option>
+          <option value="11">December</option>
+        </select>
+
+        <select id="fromYear" class="p-2 border border-gray-300 text-sm rounded">
+          <!-- You can adjust the year range as needed -->
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+        </div>
+        </div>
+      {{!-- To Period --}}
+      <div class="flex flex-col px-2 py-2 bg-gray-100">
+    <label class="text-sm font-bold text-gray-700">To</label>
+    <div class="flex gap-2">
+        <select id="toMonth" class="p-2 border border-gray-300 text-sm rounded">
+          <option value="0">January</option>
+          <option value="1">February</option>
+          <option value="2">March</option>
+          <option value="3">April</option>
+          <option value="4">May</option>
+          <option value="5">June</option>
+          <option value="6">July</option>
+          <option value="7">August</option>
+          <option value="8">September</option>
+          <option value="9">October</option>
+          <option value="10">November</option>
+          <option value="11">December</option>
+        </select>
+
+        <select id="toYear" class="p-2 border border-gray-300 text-sm rounded">
+          <!-- You can adjust the year range as needed -->
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+         </div>
+        </div>
+
+        
+
+        <!-- Milestone selection (used only for milestoneHours report) -->
+        <select id="milestoneList" class="p-2 border border-gray-300 text-sm rounded hidden">
+          <option value="67e41304424bccd9f15eec2e">FF Central Operations/Finance</option>
+          <!-- Add more milestones as needed -->
+        </select>
+
+        <button id="viewReportBtn"  class="px-4 py-2 bg-secondary-600 text-white text-sm rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">View Report</button>
+      </div> 
+     </div>
+
+   
+
+    {{!-- <h2 class="text-xl font-semibold mb-4">Reports</h2> --}}
+
+    <!-- milestone-report-table -->
+    <table id="milestone-report-table" class="w-full text-sm table-auto border-collapse border border-gray-300">
+  <thead id="milestone-report-table-head"></thead>
+  <tbody id="milestone-report-table-body"></tbody>
+  <tfoot class="hidden">
+    <tr><td style="height:120px;"></td></tr>
+  </tfoot>
+</table>
+
+<button id="printReportTableBtn" class="px-4 py-2 mt-4 bg-secondary-600 text-white text-sm rounded-lg hover:bg-secondary-700 hidden">
+  Print Report
+</button>
+
+
+
+  </div>
+</div>

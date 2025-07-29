@@ -1,0 +1,73 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeUsers=true}}
+
+  <div class="md:col-span-9 ml-10">
+    <div class=" text-gray-500 text-sm italic">
+        HRIS / <a href="/users">Users/ </a>
+        <span id="updateUser">Update Consultant</span>
+    </div>
+    <!-- eslint-disable-next-line -->
+    
+    <div id="successMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-green-600 rounded-lg hidden">
+      <span>Success Message</span>
+    </div>
+    <div id="errorMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-secondary-500 rounded-lg hidden">
+      <span>Error Message</span>
+    </div>
+  <div class="container mx-auto mt-10 my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h2 class="font-bold mb-16 text-left">Update User</h2>
+    <form id="UserForm"  enctype="multipart/form-data">
+      <div class="grid grid-cols-1 md:grid-cols-2 mb-10 gap-6">
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">User Name</label>
+          <input type="text" name="userName" id="userName" 
+                 class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm" 
+                 value="{{user.name}}" disabled>
+        </div>
+
+        <!-- Email Address -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">User Email</label>
+          <input type="text" name="userEmail" id="userEmail" 
+                 class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm" 
+                 value="{{user.email}}" disabled>
+        </div>
+
+        <!-- Role -->
+        <div>
+          <label for="role" class="block text-sm font-medium text-gray-700">User Role</label>
+          <select name="userRole" id="userRole" required 
+                  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <option value="user" {{#if (eq user.role "user")}}selected{{/if}}>User</option>
+            <option value="leader" {{#if (eq user.role "leader")}}selected{{/if}}>Leader</option>
+            <option value="supervisor" {{#if (eq user.role "supervisor")}}selected{{/if}}>Supervisor</option>
+            <option value="manager" {{#if (eq user.role "manager")}}selected{{/if}}>Manager</option>
+            <option value="admin" {{#if (eq user.role "admin")}}selected{{/if}}>Admin</option>
+          </select>
+        </div>
+
+        <!-- Status-->
+        <div>
+          <label for="active" class="block text-sm font-medium text-gray-700">User Status</label>
+          <select name="userStatus" id="userStatus" required 
+                  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <option value="true" {{#if user.active}}selected{{/if}}>Active</option>
+            <option value="false" {{#if user.active}}selected{{/if}}>Inactive</option>
+          </select>
+        </div>
+
+      </div>
+      
+
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit" id="updateUserBtn" class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Update User
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--- Footer Here -->

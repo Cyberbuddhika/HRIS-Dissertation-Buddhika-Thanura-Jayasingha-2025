@@ -1,0 +1,221 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeConsultants=true}}
+
+  <div class="md:col-span-9 ml-10">
+    <div class=" text-gray-500 text-sm italic">
+         HRIS / <a href="/consultants">Consultants / </a>
+        <span id="consultantCreate">Consultant Creation</span>
+    </div>
+    <div id="successMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-green-600 rounded-lg hidden">
+      <span>Success Message</span>
+    </div>
+    <div id="errorMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-secondary-500 rounded-lg hidden">
+      <span>Error Message</span>
+    </div>
+  <div class="container mx-auto mt-10 my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h2 class="font-bold mb-16 text-left">Add New Consultant</h2>
+    <form id="consultantForm"  enctype="multipart/form-data">
+    <p class="py-5 text-xs">All fields marked with * are required</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 mb-10 gap-6">
+        
+        <!-- Name -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name *</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Designation -->
+        <div>
+          <label for="designation" class="block text-sm font-medium text-gray-700">Designation *</label>
+          <input type="text" name="designation" id="designation" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Email Address -->
+        <div>
+          <label for="companyEmailAddress" class="block text-sm font-medium text-gray-700">Company Email Address *</label>
+          <input type="email" name="companyEmailAddress" id="companyEmailAddress" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-12 mb-10 gap-6">
+        <!-- Contract Number (smaller) -->
+        <div class="md:col-span-3">
+          <div>
+            <label for="contractNumber" class="block text-sm font-medium text-gray-700">Contract Number *</label>
+            <input type="text" name="contractNumber" id="contractNumber" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </div>
+        </div>
+
+        <!-- Line Manager (smaller) -->
+        <div class="md:col-span-3">
+          <div>
+            <label for="lineManager" class="block text-sm font-medium text-gray-700">Line Manager *</label>
+            <select name="lineManager" id="lineManager" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+              <!-- Add your options here -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Contract File URL (larger) -->
+        <div class="md:col-span-6">
+          <div>
+            <label for="contractUrl" class="block text-sm font-medium text-gray-700">Contract File URL</label>
+            <input type="text" name="contractUrl" id="contractUrl" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+        <!-- Contract Start Date -->
+        <div>
+          <label for="contractStartDate" class="block text-sm font-medium text-gray-700">Contract Start Date *</label>
+          <input type="date" name="contractStartDate" id="contractStartDate" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Contract End Date -->
+        <div>
+          <label for="contractEndDate" class="block text-sm font-medium text-gray-700">Contract End Date *</label>
+          <input type="date" name="contractEndDate" id="contractEndDate" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+         <!-- Consultant Status -->
+        <div>
+          <label for="contractEndDate" class="block text-sm font-medium text-gray-700">Consultant Status *</label>
+          <select name="consultantStatus" id="consultantStatus" required disabled class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <option value="Active" selected>Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <input type="hidden" name="consultantStatus" id="hiddenConsultantStatus" value="Active">
+        </div>
+
+        <!-- Consultant Category -->
+        <div>
+          <label for="consultantCategory" class="block text-sm font-medium text-gray-700">Consultant Category *</label>
+          <select name="consultantCategory" id="consultantCategory" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <!-- Options will be populated dynamically -->
+          </select>
+        </div>
+      </div>  
+
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+
+        <!-- Salary Rate -->
+        <div>
+          <label for="salaryRate" class="block text-sm font-medium text-gray-700">Salary Rate *</label>
+          <select type="text" name="salaryRate" id="salaryRate" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <option value="Monthly">Monthly</option>
+            <option value="Daily">Daily</option>
+            <option value="Hourly">Hourly</option>
+            <option value="Annually">Annually</option>
+          </select>
+        </div>
+
+        <!-- Salary -->
+        <div>
+          <label for="salary" class="block text-sm font-medium text-gray-700">Salary ($) *</label>
+          <input  min="0" name="salary" id="salary" step=".01" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- No of Working Days per Month -->
+        <div>
+          <label for="noOfWorkingDaysPerMonth" class="block text-sm font-medium text-gray-700">No of Working Days per Month *</label>
+          <input type="number" min="0" name="noOfWorkingDaysPerMonth" id="noOfWorkingDaysPerMonth"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- No of Working Hours per Month -->
+        <div>
+          <label for="noOfWorkingHoursPerMonth" class="block text-sm font-medium text-gray-700">No of Working Hours per Month *</label>
+          <input type="number" min="0" name="noOfWorkingHoursPerMonth" id="noOfWorkingHoursPerMonth" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        </div>
+
+       <div class="grid grid-cols-1 md:grid-cols-12 mb-10 gap-6">
+
+        <!-- Contractual Benefits -->
+        <div class="md:col-span-3">
+        <div>
+          <span class="block mb-2 text-sm font-medium text-gray-700">Contractual Benefits</span>
+          <div id="benefitCheckboxes"></div>
+        </div>
+        </div>
+
+
+        <!-- IR35 Compliance -->
+        <div class="md:col-span-2 align-middle">
+        <div class="flex flex-col items-center justify-center">
+          <label for="ir35Compliance" class="block mb-2  text-sm font-medium text-gray-700">IR35 Compliance</label>
+          <input type="checkbox" name="ir35Compliance" id="ir35Compliance"  class="mt-1 h-4 w-4 text-secondary-600 border-gray-300 rounded focus:ring-secondary-500">
+        </div>
+        </div>
+
+
+        <!-- IR35 Description -->
+         <div class="md:col-span-7">
+        <div>
+          <label for="ir35Description" class="block text-sm font-medium text-gray-700">Description of IR35</label>
+          <textarea name="ir35Description" id="ir35Description" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm"></textarea>
+        </div>
+        </div>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-10 mb-10 gap-6">
+
+        <!-- Address -->
+        <div class="md:col-span-8">
+        <div>
+          <label for="address" class="block text-sm font-medium text-gray-700">Address *</label>
+          <input type="text" name="address" id="address" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+        </div>
+
+        <!-- Based Country -->
+        <div class="md:col-span-2">
+        <div>
+          <label for="basedCountry" class="block text-sm font-medium text-gray-700">Based Country *</label>
+          <select name="basedCountry" id="basedCountry" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <!-- Options will be populated dynamically -->
+          </select>
+        </div>
+        </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+
+        <!-- Nationality -->
+        <div>
+          <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality *</label>
+          <select name="nationality" id="nationality" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <!-- Options will be populated dynamically -->
+          </select>
+        </div>  
+
+        <!-- Contact No -->
+        <div>
+          <label for="contactNumber" class="block text-sm font-medium text-gray-700">Contact No *</label>
+          <input type="text" name="contactNumber" id="contactNumber" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Emergency Contact Number -->
+        <div>
+          <label for="emergencyContactNumber" class="block text-sm font-medium text-gray-700">Emergency Contact Number</label>
+          <input type="text" name="emergencyContactNumber" id="emergencyContactNumber" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+
+
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit" id="addConsultantBtn" class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Add Consultant
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--- Footer Here -->

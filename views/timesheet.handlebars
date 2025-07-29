@@ -1,0 +1,183 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeTimesheet=true}}
+
+  <div id="timesheet-module" class="col-span-12 container mx-auto px-4">
+    {{!-- <div id="timesheetModal" ></div> --}}
+
+    <!-- Header Section -->
+    <div class="flex justify-between  items-start mt-6 mb-6">
+      <div class="flex space-x-4 mb-4">
+        <select id="month" class="p-2 border border-gray-300 rounded">
+          <option value="0">January</option>
+          <option value="1">February</option>
+          <option value="2">March</option>
+          <option value="3">April</option>
+          <option value="4">May</option>
+          <option value="5">June</option>
+          <option value="6">July</option>
+          <option value="7">August</option>
+          <option value="8">September</option>
+          <option value="9">October</option>
+          <option value="10">November</option>
+          <option value="11">December</option>
+        </select>
+
+        <select id="year" class="p-2 border border-gray-300 rounded">
+          <!-- You can adjust the year range as needed -->
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+
+        <button id="viewCalendarBtn"  class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">View Calendar</button>
+      </div>  
+        <button id="submitButton" class="m1-auto px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">Submit</button>
+    </div>
+
+    <div class="flex flex-col  mt-6 mb-8">
+        <div id="consultant-name" class="text-2xl font-bold"></div>
+        <div id="consultant-designation" class="text-sm"></div>
+    </div>
+    
+    <!-- Inline Summary Section -->
+    <div class="bg-secondary-900 p-3 rounded-lg mb-10">
+      <div class="flex justify-between mt-4 text-center space-x-4">
+
+        <div class="flex flex-col items-center">
+          <div class="text-sm text-black">Reported time this month</div>
+          <div id="reported-time" class="text-2xl font-bold"></div>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="text-sm text-black">Contract maximum working hours / days</div>
+          <div id="consultant-working-hours-days" class="text-2xl font-bold"></div>
+        </div>
+        {{!-- <div class="flex flex-col items-center">
+          <div class="text-sm text-black">Overtime this month</div>
+          <div class="text-2xl font-bold">1h</div>
+        </div> --}}
+        <div id="leave-summary" class="flex flex-row gap-4 space-x-6">
+          {{!-- <div class="text-sm text-black">Day off this month</div>
+          <div id="days-off" class="text-2xl font-bold"></div> --}}
+          {{!-- <div id="leave-summary" class="flex flex-col space-y-2"></div> --}}
+        </div>
+      </div>
+
+      <!-- Summary Section -->
+      <div class="mt-8 mb-6">
+        <div class="text-lg font-semibold mb-4">Summary</div>
+        <div id="milestone-box" class="flex flex-wrap gap-2 items-center">
+          
+          <!-- Additional milestone boxes can be added as needed -->
+        </div>
+      </div>
+     </div> 
+
+    <!-- Calendar Section -->
+    <div class="container mx-auto">
+
+  <!-- Calendar Table -->
+  <table class="table-auto border-collapse w-full">
+    <!-- Table Header for Days of the Week -->
+    <thead id="calendarHead">
+
+    </thead>
+    <tbody id="calendarBody">
+    
+    </tbody>
+    
+  </table>
+
+</div>
+  <!-- Modal Backdrop -->
+<div id="modalBackdrop" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+<!-- Timesheet Modal -->
+<div id="timesheetModal" class="hidden fixed inset-0 flex items-center justify-center z-50 ">
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-2xl ">
+    <!-- Modal Header -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 id="modalDate" class="text-lg font-semibold"></h2>
+      <button id="modalClose" class="text-gray-500 hover:text-gray-800">&times;</button>
+    </div>
+
+    <!-- Modal Content -->
+    <div class="space-y-4">
+      <!-- Status Selection -->
+      <div>
+        <label for="statusSelect" class="block font-medium">Status</label>
+        <select id="statusSelect" class="w-full border rounded px-3 py-2">
+          <option value="worked">Worked</option>
+          <option value="leave">Leave</option>
+        </select>
+      </div>
+
+      <!-- Milestone Selection -->
+      <div id="workedFields">
+      <div>
+        <label for="milestoneSelect" class="block font-medium">Activity</label>
+        <select id="milestoneSelect" class="w-full border rounded px-3 py-2">
+          <option value="">Select an activity</option>
+          {{#each milestones}}
+            <option value="{{this.id}}">{{this.name}} ({{this.project}})</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <!-- Hours Input -->
+      <div class="mt-4">
+        <label for="hoursInput" class="block font-medium">Hours Worked</label>
+        <input id="hoursInput" type="number" step="0.5" min="0" class="w-full border rounded px-3 py-2" />
+      </div>
+
+      <!-- Weekend Checkbox (Auto-detected) -->
+      <div class="flex items-center gap-2 mt-4 hidden">
+        <input id="weekendInput" type="checkbox" class="mr-2" disabled />
+        <label for="weekendInput" class="font-medium">This is a weekend</label>
+      </div>
+    </div>
+
+     </div>
+
+
+    <!-- Leave Selection -->
+      <div id="leaveFields" class="hidden mt-4">
+        <label for="leaveSelect" class="block font-medium">Leave</label>
+        <select id="leaveSelect" class="w-full border rounded px-3 py-2">
+          <option value="">Select a leave type</option>
+          {{#each leaves}}
+            <option value="{{this.id}}">{{this.type}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <!-- Full Day / Half Day Selection -->
+      <div id="leavePeriodFields" class="hidden mt-4">
+        <label for="leavePeriodSelect" class="block font-medium">Leave Period</label>
+        <select id="leavePeriodSelect" class="w-full border rounded px-3 py-2">
+          <option value="Full Day">Full Day</option>
+          <option value="Half Day">Half Day</option>
+        </select>
+      </div>
+
+    
+
+    <!-- Submit Button -->
+    <div class="mt-4 flex justify-end">
+      <button id="submitEntry" class="m1-auto px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+        Save
+      </button>
+    </div>
+    
+    <!-- Existing Entries List -->
+    <div id="existingEntriesContainer" class="mt-4">
+      <h3 class="text-md font-semibold">Existing Entries</h3>
+      <div id="existingEntries" class="space-y-2">
+        <!-- Existing timesheet entries will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  </div>
+</div>

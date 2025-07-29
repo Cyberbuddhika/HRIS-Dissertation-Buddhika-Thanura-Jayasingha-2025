@@ -1,0 +1,68 @@
+
+
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeConsultants=true}}
+
+  <div class="md:col-span-10 ml-10 mr-10">
+    <div class=" text-gray-500 text-sm italic">
+        HRIS / </a>
+        <span>Consultants</span>
+        </div>
+    <div class="mt-10 rounded-lg shadow-md bg-white">
+      <h2 class="p-5 font-bold">Consultants</h2>
+      <div class="flex justify-end items-center space-x-4 p-4">
+        <input id="searchInputConsultants" type="text" placeholder="Search Name..." class="p-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-secondary-200">
+        <button id="showAllConsultants" class="px-3 py-1 text-sm text-secondary-200 border border-secondary-200 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md">Show All</button>
+        <label for="toggle" class="text-sm text-gray-700">Toggle Status</label>
+        <i id="toggleActiveConsultants" class="fa-solid fa-toggle-on text-xl text-green-500 cursor-pointer"></i>
+        <i id="toggleInactiveConsultants" class="fa-solid fa-toggle-off text-xl text-secondary-500 cursor-pointer hidden"></i>
+         
+      </div>
+      <div class="p-4 mb-6">
+        <table id="consultantTable" class="table-auto w-full border-collapse bg-white rounded-lg">
+          <thead>
+            <tr class="text-gray-600 align-top text-xs lg:text-sm leading-normal">
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="name">Name</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="designation">Designation</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="consultantCategory">Category</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="contractEndDate">Contract End Date</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600 hidden" data-column="consultantStatus">Status</th>
+              <th class="py-3 px-4 text-left cursor-pointer hover:text-secondary-600" data-column="assignedMilestones">Project & Deliverables</th>
+            </tr>
+          </thead>
+          <tbody id="consultantTableBody" class="text-gray-600 text-xs lg:text-sm font-light">
+            {{#each consultants}}
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
+              <td data-column="name" class="py-3 px-4 text-left">
+                <a href="/consultant/{{this._id}}" class="flex items-center space-x-2 text-secondary-400 hover:underline">
+                  {{#if this.profilePicture}}
+                    <img src="{{this.profilePicture}}" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                  {{/if}}
+                  <span>{{this.name}}</span>
+                </a>
+              </td>
+              <td data-column="designation" class="py-3 px-4 text-left">{{this.designation}}</td>
+              <td data-column="consultantCategory" class="py-3 px-4 text-left">{{this.consultantCategory}}</td>
+              <td data-column="contractEndDate" class="py-3 px-4 text-left">{{formatDate this.contractEndDate}}</td>
+              <td data-column="consultantStatus" class="py-3 px-4 text-left hidden">
+                {{#if (eq this.consultantStatus "Active")}}
+                  <i class="fas fa-check-circle text-green-500"></i> Active
+                {{else}}
+                  <i class="fas fa-times-circle text-red-500 consultant-inactive"></i> Inactive
+                {{/if}}
+              </td>
+              <td data-column="assignedMilestones" class="py-3 px-4 text-lef">
+                {{#each (extractMilestoneNames this.assignedMilestones)}}
+                    <span class="px-2 py-1 mt-1 mb-2 flex content-around rounded-lg bg-slate-300 ">{{this.projectName}}: {{this.milestoneName}}</span>
+                {{/each}}
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
+</div>
+

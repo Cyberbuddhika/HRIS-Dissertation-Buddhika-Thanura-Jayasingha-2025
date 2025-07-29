@@ -1,0 +1,162 @@
+<div class="grid gap-x-10 md:grid-cols-14 ml-56 p-6 max-h-screen overflow-y-auto">
+  {{> _sidePanel activeMilestones=true}}
+
+  <div class="md:col-span-10 ml-10 mr-10">
+    <div class=" text-gray-500 text-sm italic">
+         HRIS /
+        <span id="updateMilestone">Update Deliverable</span>
+    </div>
+    <div id="successMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-green-600 rounded-lg hidden">
+      <span>Success Message</span>
+    </div>
+    <div id="errorMessage" class="mt-8 w-auto h-auto px-2 py-3 mx-auto flex justify-center items-center text-white bg-secondary-500 rounded-lg hidden">
+      <span>Error Message</span>
+    </div>
+  <div class="container mx-auto mt-10 my-10 p-6 bg-white rounded-lg shadow-lg">
+    <h2 class="font-bold mb-16 text-left">Update Deliverable</h2>
+    <form id="milestoneForm"  enctype="multipart/form-data">
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+        <!-- Deliverable Name -->
+        <div class="md:col-span-2">
+        <div>
+          <label for="name" class="block text-sm font-medium text-secondary-200">Deliverable Name *</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+        </div>
+
+        <!-- Project -->
+        <div class="md:col-span-1">
+        <div>
+          <label for="projectName" class="block text-sm font-medium text-secondary-200">Project *</label>
+          <select type="text" name="projectName" id="projectName" required disabled class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </select>  
+        </div>
+        </div>
+
+        <!-- Country -->
+        <div class="md:col-span-1">
+        <div>
+          <label for="milestoneCountry" class="block text-sm font-medium text-secondary-200">Deliverable Country *</label>
+          <select type="text" name="milestoneCountry" id="milestoneCountry" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </select>  
+        </div>
+        </div>
+
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 mb-10 gap-6">
+
+        <!-- Deliverable Description -->
+        <div class="md:col-span-9">
+          <div>
+            <label for="description" class="block text-sm font-medium text-secondary-200">Deliverable Description *</label>
+            <input type="text" name="description" id="description" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="md:col-span-3">
+        <div>
+          <label for="milestoneLocation" class="block text-sm font-medium text-gray-700">Deliverable Location</label>
+          <input list="cities" id="milestoneLocation" name="milestoneLocation" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm" placeholder="Type or select a city">
+          <datalist id="cities"></datalist>
+        </div>
+        </div>
+
+        </div> 
+
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+        <!-- Deliverable Commence Date -->
+        <div>
+          <label for="milestoneStartDate" class="block text-sm font-medium text-secondary-200">Deliverable Commence Date</label>
+          <input type="date" name="milestoneStartDate" id="milestoneStartDate" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Deliverable End Date -->
+        <div>
+          <label for="milestoneDueDate" class="block text-sm font-medium text-secondary-200">Deliverable End Date</label>
+          <input type="date" name="milestoneDueDate" id="milestoneDueDate"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+         <!-- Deliverable Status -->
+        <div>
+          <label for="milestoneStatus" class="block text-sm font-medium text-secondary-200">Deliverable Status *</label>
+          <select name="milestoneStatus" id="milestoneStatus" required  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+            <option value="Active" selected>Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+          <input type="hidden" name="milestoneStatus" id="hiddenmilestoneStatus" value="Active">
+        </div>
+
+        <!-- Milestone Leader -->
+
+        <div>
+          <label for="milestoneLeader" class="block text-sm font-medium text-gray-700">Deliverable Leader *</label>
+          <select  name="milestoneLeader" id="milestoneLeader" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </select>
+        </div>
+
+      </div>  
+
+      <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+
+        <!-- Deliverable Total Fees -->
+       <div>
+          <label for="milestoneTotalFeeBudget" class="block text-sm font-medium text-secondary-200">Deliverable Total Fees ($)</label>
+          <input min="0" name="milestoneTotalFeeBudget" id="milestoneTotalFeeBudget" class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Deliverable Total Expenses -->
+        <div>
+          <label for="milestoneTotalExpenseBudget" class="block text-sm font-medium text-secondary-200">Deliverable Total Expenses($)</label>
+          <input min="0" name="milestoneTotalExpenseBudget" id="milestoneTotalExpenseBudget"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Deliverable Total Overhead -->
+        <div>
+          <label for="milestoneTotalOverhead" class="block text-sm font-medium text-secondary-200">Deliverable Total Overhead ($)</label>
+          <input min="0" name="milestoneTotalOverhead" id="milestoneTotalOverhead"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        <!-- Deliverable Total Value -->
+        <div>
+          <label for="" class="block text-sm font-medium text-secondary-200">Deliverable Total Value ($)</label>
+          <input min="0" name="" id="milestoneTotalValue"  disabled class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+        </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 mb-10 gap-6">
+          <div class="md:col-span-4">
+          <div>
+            <label for="milestoneNote" class="block text-sm font-medium text-secondary-200">Deliverable Note</label>
+            <input type="textarea" name="milestoneNote" id="milestoneNote"  class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-secondary-500 focus:border-secondary-500 sm:text-sm">
+          </div>
+          </div>
+        </div>
+        
+        <span class="mb-3 block text-sm font-bold">Consultants for the Deliverable</span>
+        <div class="flex gap-2 items-center mb-4">
+        <!-- Add More Consultants Button -->
+          <div class="md:col-span-1 flex items-center">
+            <svg type="button" id="addConsultantBtn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hover:cursor-pointer">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+            </svg>
+          </div>
+          <span class="block text-sm font-light">(Click here to add consultants)</span>
+        </div>  
+
+      <div id="deliverableConsultantsContainer">
+         
+        </div>
+
+      <!-- Submit Button -->
+      <div class="mt-6">
+        <button type="submit" id="addProjectBtn" class="px-4 py-2 bg-secondary-600 text-white font-medium rounded-lg hover:bg-secondary-200  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500">
+          Update Deliverable
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--- Footer Here -->
